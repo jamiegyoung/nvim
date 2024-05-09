@@ -23,5 +23,15 @@ vim.opt.listchars = {
   extends = "⟩", -- Angle bracket for line that extends beyond the screen
   precedes = "⟨", -- Angle bracket for line that precedes the screen
 }
+
+function Trim_whitespace()
+  local save = vim.fn.winsaveview()
+  vim.cmd "%s/\\s\\+$//e"
+  vim.fn.winrestview(save)
+end
+
+-- Define an autocommand to trigger trim_whitespace() function on BufWritePre event
+vim.cmd [[autocmd BufWritePre * lua Trim_whitespace()]]
+
 require "lazy_setup"
 require "polish"
