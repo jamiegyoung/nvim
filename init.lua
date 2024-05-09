@@ -15,5 +15,13 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "  ", -- Two spaces for tab
+  nbsp = "␣", -- Unicode representation of non-breaking space
+  trail = "•", -- Bullet for trailing whitespace
+  extends = "⟩", -- Angle bracket for line that extends beyond the screen
+  precedes = "⟨", -- Angle bracket for line that precedes the screen
+}
 require "lazy_setup"
 require "polish"
