@@ -484,10 +484,18 @@ require("lazy").setup({
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				clangd = {},
-				gopls = {},
+				-- clangd = {},
+				-- gopls = {},
 				pyright = {},
 				rust_analyzer = {},
+				solargraph = {
+					cmd = { "bundle", "exec", "solargraph", "stdio" },
+					root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
+				},
+				rubocop = {
+					cmd = { "bundle", "exec", "rubocop", "--lsp" },
+					root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
+				},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
@@ -797,7 +805,7 @@ require("lazy").setup({
 	--  Here are some example plugins that I've included in the Kickstart repository.
 	--  Uncomment any of the lines below to enable them (you will need to restart nvim).
 	--
-	-- require 'kickstart.plugins.debug',
+	require("kickstart.plugins.debug"),
 	-- require 'kickstart.plugins.indent_line',
 	require("kickstart.plugins.lint"),
 	require("kickstart.plugins.autopairs"),
