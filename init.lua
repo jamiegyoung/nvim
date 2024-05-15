@@ -489,7 +489,7 @@ require("lazy").setup({
 				pyright = {},
 				rust_analyzer = {},
 				solargraph = {
-					cmd = { "bundle", "exec", "solargraph", "stdio" },
+					-- cmd = { "bundle", "exec", "solargraph", "stdio" },
 					root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
 				},
 				rubocop = {
