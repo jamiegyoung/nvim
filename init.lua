@@ -636,10 +636,11 @@ require("lazy").setup({
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"zbirenbaum/copilot.lua",
 		},
 		config = function()
 			-- See `:help cmp`
-			local cmp = require("cmp")
+			local cmp, copilot = require("cmp"), require("copilot.suggestion")
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
 
@@ -665,10 +666,13 @@ require("lazy").setup({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 
-					-- Accept ([y]es) the completion.
-					--  This will auto-import if your LSP supports it.
-					--  This will expand snippets if the LSP sent a snippet.
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					["<C-y>"] = cmp.mapping(function()
+						if copilot.is_visible() then
+							copilot.accept()
+						else
+							cmp.mapping.confirm({ select = true })
+						end
+					end),
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
@@ -702,6 +706,24 @@ require("lazy").setup({
 
 					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+					--
+					["<C-x>"] = cmp.mapping(function()
+						if copilot.is_visible() then
+							copilot.next()
+						end
+					end),
+
+					["<C-z>"] = cmp.mapping(function()
+						if copilot.is_visible() then
+							copilot.prev()
+						end
+					end),
+
+					["<C-c>"] = cmp.mapping(function()
+						if copilot.is_visible() then
+							copilot.dismiss()
+						end
+					end),
 				}),
 				sources = {
 					{ name = "nvim_lsp" },
@@ -807,6 +829,13 @@ require("lazy").setup({
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
 	},
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		opts = { suggestion = { auto_trigger = true, debounce = 150 } },
+	},
+	-- { "zbirenbaum/copilot-cmp", opts = {}, dependencies = { "zbirenbaum/copilot.lua" } },
 
 	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
 	-- init.lua. If you want these files, they are in the repository, so you can just download them and
