@@ -669,11 +669,11 @@ require("lazy").setup({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 
-					["<C-y>"] = cmp.mapping(function()
+					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+
+					["<C-c>"] = cmp.mapping(function()
 						if copilot.is_visible() then
 							copilot.accept()
-						else
-							cmp.mapping.confirm({ select = true })
 						end
 					end),
 
@@ -719,12 +719,6 @@ require("lazy").setup({
 					["<C-z>"] = cmp.mapping(function()
 						if copilot.is_visible() then
 							copilot.prev()
-						end
-					end),
-
-					["<C-c>"] = cmp.mapping(function()
-						if copilot.is_visible() then
-							copilot.dismiss()
 						end
 					end),
 				}),
