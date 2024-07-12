@@ -864,6 +864,20 @@ require("lazy").setup({
 		},
 	},
 	{
+		"tris203/hawtkeys.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = {
+			customMaps = {
+				["lazy"] = {
+					method = "lazy",
+				},
+			},
+		},
+	},
+	{
 		"ggandor/leap.nvim",
 		config = function()
 			local leap = require("leap")
