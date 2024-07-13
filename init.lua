@@ -57,7 +57,7 @@ vim.opt.updatetime = 250
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
--- Configure how new splits should be opened
+--
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -861,6 +861,21 @@ require("lazy").setup({
 		keys = {
 			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
+	},
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			local leap = require("leap")
+			leap.add_default_mappings()
+
+			-- Unmap the default 't' keybinding
+			vim.api.nvim_set_keymap("", "s", "", { noremap = true })
+
+			-- Map 't' to leap forward
+			vim.api.nvim_set_keymap("n", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("x", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("o", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
+		end,
 	},
 
 	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
