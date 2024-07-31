@@ -85,10 +85,15 @@ return {
 
 			-- Unmap the default 't' keybinding
 			vim.api.nvim_set_keymap("", "s", "", { noremap = true })
-			-- Map 't' to leap forward
+			vim.api.nvim_set_keymap("", "S", "", { noremap = true })
+			-- Map 's' to leap forward
 			vim.api.nvim_set_keymap("n", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("x", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("o", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
+			-- Map 'S' to leap backward
+			vim.api.nvim_set_keymap("n", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("x", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("o", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
 		end,
 	},
 }
