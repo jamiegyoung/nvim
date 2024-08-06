@@ -103,4 +103,7 @@ return {
 			{ "<leader>dg", "<cmd>DogeGenerate<cr>", desc = "Generate Doge" },
 		},
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+	},
 }
