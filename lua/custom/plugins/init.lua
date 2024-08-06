@@ -96,4 +96,11 @@ return {
 			vim.api.nvim_set_keymap("o", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
 		end,
 	},
+	{
+		"kkoomen/vim-doge",
+		lazy = false,
+		keys = {
+			{ "<leader>dg", "<cmd>DogeGenerate<cr>", desc = "Generate Doge" },
+		},
+	},
 }
