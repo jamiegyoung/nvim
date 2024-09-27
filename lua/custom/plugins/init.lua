@@ -31,7 +31,9 @@ return {
 			debug = true, -- Enable debugging
 			-- See Configuration section for rest
 		},
-		-- See Commands section for default commands if you want to lazy load on them
+		keys = {
+			{ "<leader>cc", "<cmd>CopilotChat<cr>", desc = "Open Copilot Chat" },
+		},
 	},
 	{
 		"kdheepak/lazygit.nvim",
