@@ -488,19 +488,19 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- clangd = {},
-				gopls = {},
+				-- gopls = {},
 				pyright = {},
 				rust_analyzer = {},
-				solargraph = {
-					-- cmd = { "bundle", "exec", "solargraph", "stdio" },
-					root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
-				},
-				rubocop = {
-					cmd = { "bundle", "exec", "rubocop", "--lsp" },
-					root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
-				},
+				-- solargraph = {
+				-- 	-- cmd = { "bundle", "exec", "solargraph", "stdio" },
+				-- 	root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
+				-- },
+				-- rubocop = {
+				-- 	cmd = { "bundle", "exec", "rubocop", "--lsp" },
+				-- 	root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
+				-- },
 				twiggy_language_server = {},
-				phpactor = {},
+				-- phpactor = {},
 
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
