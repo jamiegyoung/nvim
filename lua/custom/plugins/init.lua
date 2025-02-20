@@ -6,33 +6,61 @@ return {
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
 		end,
+		ft = { "markdown" },
 	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	cmd = "Copilot",
+	-- 	event = "InsertEnter",
+	-- 	opts = {
+	-- 		suggestion = { auto_trigger = true, debounce = 150 },
+	-- 		filetypes = { ["*"] = true },
+	-- 	},
+	-- },
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	branch = "canary",
+	-- 	dependencies = {
+	-- 		{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+	-- 		{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+	-- 	},
+	-- 	opts = {
+	-- 		debug = true, -- Enable debugging
+	-- 		-- See Configuration section for rest
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>cc", "<cmd>CopilotChat<cr>", desc = "Open Copilot Chat" },
+	-- 	},
+	-- },
 	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		opts = {
-			suggestion = { auto_trigger = true, debounce = 150 },
-			filetypes = { ["*"] = true },
-		},
-	},
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
+		"olimorris/codecompanion.nvim",
+		config = function()
+			require("codecompanion.adapters").extend("gemini", {
+				env = {
+					api_key = function()
+						return os.getenv("GEMINI_API_KEY")
+					end,
+					model = "schema.model.default",
+				}
+			})
+			require("codecompanion").setup({
+				strategies = {
+					chat = {
+						adapter = "gemini",
+					},
+					inline = {
+						adapter = "gemini",
+					},
+				},
+			})
+		end,
 		dependencies = {
-			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-		},
-		opts = {
-			debug = true, -- Enable debugging
-			-- See Configuration section for rest
-		},
-		keys = {
-			{ "<leader>cc", "<cmd>CopilotChat<cr>", desc = "Open Copilot Chat" },
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
 	},
 	{
