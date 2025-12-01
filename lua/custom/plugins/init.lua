@@ -31,21 +31,21 @@ return {
 	-- 		filetypes = { ["*"] = true },
 	-- 	},
 	-- },
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
-		dependencies = {
-			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-		},
-		opts = {
-			debug = true, -- Enable debugging
-			-- See Configuration section for rest
-		},
-		keys = {
-			{ "<leader>cc", "<cmd>CopilotChat<cr>", desc = "Open Copilot Chat" },
-		},
-	},
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	branch = "canary",
+	-- 	dependencies = {
+	-- 		{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+	-- 		{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+	-- 	},
+	-- 	opts = {
+	-- 		debug = true, -- Enable debugging
+	-- 		-- See Configuration section for rest
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>cc", "<cmd>CopilotChat<cr>", desc = "Open Copilot Chat" },
+	-- 	},
+	-- },
 	-- {
 	-- 	"olimorris/codecompanion.nvim",
 	-- 	config = function()
@@ -175,20 +175,9 @@ return {
 	{
 		"ggandor/leap.nvim",
 		config = function()
-			local leap = require("leap")
-			leap.add_default_mappings()
-
-			-- Unmap the default 't' keybinding
-			vim.api.nvim_set_keymap("", "s", "", { noremap = true })
-			vim.api.nvim_set_keymap("", "S", "", { noremap = true })
-			-- Map 's' to leap forward
-			vim.api.nvim_set_keymap("n", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("x", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("o", "s", "<Plug>(leap-forward-to)", { noremap = true, silent = true })
-			-- Map 'S' to leap backward
-			vim.api.nvim_set_keymap("n", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("x", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("o", "S", "<Plug>(leap-backward-to)", { noremap = true, silent = true })
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { desc = "Leap forward" })
+			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { desc = "Leap backward" })
+			vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)", { desc = "Leap from window" })
 		end,
 	},
 	{
@@ -219,7 +208,7 @@ return {
 			})
 		end,
 		keys = {
-			{ "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude Code" },
+			{ "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Claude Code" },
 		},
 	},
 }
