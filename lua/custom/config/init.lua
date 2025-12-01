@@ -21,3 +21,5 @@ vim.api.nvim_create_user_command('Jamtest', function()
 end, {
     desc = "Insert a time-based UUID at cursor position"
 })
+
+vim.api.nvim_set_keymap('i', 'kj', '<Esc>', {})
