@@ -627,11 +627,10 @@ require("lazy").setup({
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
-			"zbirenbaum/copilot.lua",
 		},
 		config = function()
 			-- See `:help cmp`
-			local cmp, copilot = require("cmp"), require("copilot.suggestion")
+			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
 
@@ -641,7 +640,7 @@ require("lazy").setup({
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				completion = { completeopt = "menu,menuone,noinsert" },
+				completion = { completeopt = "menu,menuone,noselect" },
 
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
@@ -658,12 +657,6 @@ require("lazy").setup({
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-
-					["<C-c>"] = cmp.mapping(function()
-						if copilot.is_visible() then
-							copilot.accept()
-						end
-					end),
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
@@ -697,18 +690,6 @@ require("lazy").setup({
 
 					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-					--
-					["<C-x>"] = cmp.mapping(function()
-						if copilot.is_visible() then
-							copilot.next()
-						end
-					end),
-
-					["<C-z>"] = cmp.mapping(function()
-						if copilot.is_visible() then
-							copilot.prev()
-						end
-					end),
 				}),
 				sources = {
 					{ name = "nvim_lsp" },
